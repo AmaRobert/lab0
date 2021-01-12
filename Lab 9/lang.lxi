@@ -1,0 +1,58 @@
+%{
+    #include <math.h>
+    #include <stdio.h>
+    #include "parser.tab.h"
+    int lines = 0;
+%}
+%option noyywrap 
+DIGIT             [0-9]
+NON_ZERO          [1-9]
+WORD             ["]([ _a-zA-Z])*["]
+NUMBER            [-+]?[1-9][0-9]*|0
+ID                [a-zA-Z][a-zA-Z0-9]*
+CT                {NUMBER}|{WORD}
+INVALID_ID        {NUMBER}[a-zA-Z][a-zA-Z0-9]*
+
+%%
+
+"intreg" {printf("Reserved word: %s\n", yytext); return intreg;}
+"adevar" {printf("Reserved word: %s\n", yytext); return adevar;}
+"caractere" {printf("Reserved word: %s\n", yytext); return caractere;}
+"daca"  {printf("Reserved word: %s\n", yytext); return daca;}
+"altfel" {printf("Reserved word: %s\n", yytext); return altfel;}
+"citeste" {printf("Reserved word: %s\n", yytext); return citeste;}
+"afiseaza" {printf("Reserved word: %s\n", yytext); return afiseaza;}
+"merge" {printf("Reserved word: %s\n", yytext); return merge;}
+"lista" {printf("Reserved word: %s\n", yytext); return lista;}
+"incepe" {printf("Reserved word: %s\n", yytext); return incepe;}
+"sfarsit" {printf("Reserved word: %s\n", yytext); return sfarsit;}
+"mergeee" {printf("Reserved word: %s\n", yytext); return mergeee;}
+"baga" {printf("Reserved word: %s\n", yytext); return baga;}
+
+{INVALID_ID}    {printf("Illegal symbol: %s at line %u", yytext, lines+1); return -1;}
+{ID}            {printf("Identifier: %s\n", yytext); return id;}
+{CT}            {printf("Constant: %s\n", yytext); return ct;}
+
+"+"             {printf("Operator: %s\n", yytext); return plus;}
+"-"             {printf("Operator: %s\n", yytext); return minus;}
+"*"             {printf("Operator: %s\n", yytext); return inmultire;}
+"/"             {printf("Operator: %s\n", yytext); return impartire;}
+"%" 	        {printf("Operator: %s\n", yytext); return rest;}
+"<"             {printf("Operator: %s\n", yytext); return mic;}
+"<="            {printf("Operator: %s\n", yytext); return micE;}
+"=="            {printf("Operator: %s\n", yytext); return egal;}
+">="            {printf("Operator: %s\n", yytext); return mareE;}
+">"             {printf("Operator: %s\n", yytext); return mare;}
+"="             {printf("Separator: %s\n", yytext); return atribuie;}
+"{"             {printf("Separator: %s\n", yytext); return acoladaD;}
+"}"             {printf("Separator: %s\n", yytext); return acoladaI;}
+"["             {printf("Separator: %s\n", yytext); return patratD;}
+"]"             {printf("Separator: %s\n", yytext); return patratI;}
+"("             {printf("Separator: %s\n", yytext); return parantezaD;}
+")"             {printf("Separator: %s\n", yytext); return parantezaI;}
+";"             {printf("Separator: %s\n", yytext); return punctVirgula;}
+","             {printf("Separator: %s\n", yytext); return virgula;}
+[ \t]+          {}
+[\n]            {++lines;}
+.               {printf("Illegal symbol: %s at line %u", yytext, lines+1); return -1;}  
+%%

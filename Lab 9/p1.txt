@@ -1,0 +1,19 @@
+intreg a,b,c;
+citeste a;
+citeste b;
+citeste c;
+daca (a >= b){
+	daca (a >= c){
+		afara(a);
+	}
+}
+daca (b > a){
+	daca (b > c){
+		afara(b);
+	}
+}
+daca (c > a){
+	daca (c > b){
+		afara(c);
+	}
+}
