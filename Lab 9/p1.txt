@@ -1,19 +1,20 @@
-intreg a,b,c;
-citeste a;
-citeste b;
-citeste c;
-daca (a >= b){
-	daca (a >= c){
-		afara(a);
-	}
+intreg n, index, aux;
+citeste n;
+aux = 1;
+daca (n == 0){
+aux = 0;
 }
-daca (b > a){
-	daca (b > c){
-		afara(b);
-	}
+daca (n == 1){
+aux = 0;
 }
-daca (c > a){
-	daca (c > b){
-		afara(c);
-	}
+merge(index = 2; index <= n/2; index = index + 1;){
+daca(n % index == 0){
+aux = 0;
+}
+}
+daca(aux == 1){
+afiseaza ("este prim");
+}
+altfel{
+afiseaza ("nu este prim");
 }
